@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+        html, body, canvas, div {
+            margin: 0;
+            padding: 0;
+            /* background: #000; */
+        }
+
+        #wrap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #error {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            padding: 0 20%;
+        }
+        #error div{
+            border: 5px solid darkred;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 3em;
+            font-weight: bold;
+            color: darkred;
+            margin: 0 -5px;
+        }
+        .lds-roller {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+            top: calc(50% - 40px);
+            left: calc(50% - 40px);
+            transform: translateY(-50%);
+        }
+        
+        .lds-roller div {
+            animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            transform-origin: 40px 40px;
+        }
+
+        .lds-roller div:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #fff;
+            margin: -4px 0 0 -4px;
+        }
+
+        .lds-roller div:nth-child(1) {
+            animation-delay: -0.036s;
+        }
+
+        .lds-roller div:nth-child(1):after {
+            top: 63px;
+            left: 63px;
+        }
+
+        .lds-roller div:nth-child(2) {
+            animation-delay: -0.072s;
+        }
+
+        .lds-roller div:nth-child(2):after {
+            top: 68px;
+            left: 56px;
+        }
+
+        .lds-roller div:nth-child(3) {
+            animation-delay: -0.108s;
+        }
+
+        .lds-roller div:nth-child(3):after {
+            top: 71px;
+            left: 48px;
+        }
+
+        .lds-roller div:nth-child(4) {
+            animation-delay: -0.144s;
+        }
+
+        .lds-roller div:nth-child(4):after {
+            top: 72px;
+            left: 40px;
+        }
+
+        .lds-roller div:nth-child(5) {
+            animation-delay: -0.18s;
+        }
+
+        .lds-roller div:nth-child(5):after {
+            top: 71px;
+            left: 32px;
+        }
+
+        .lds-roller div:nth-child(6) {
+            animation-delay: -0.216s;
+        }
+
+        .lds-roller div:nth-child(6):after {
+            top: 68px;
+            left: 24px;
+        }
+
+        .lds-roller div:nth-child(7) {
+            animation-delay: -0.252s;
+        }
+
+        .lds-roller div:nth-child(7):after {
+            top: 63px;
+            left: 17px;
+        }
+
+        .lds-roller div:nth-child(8) {
+            animation-delay: -0.288s;
+        }
+
+        .lds-roller div:nth-child(8):after {
+            top: 56px;
+            left: 12px;
+        }
+
+        @keyframes lds-roller {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .hidden{
+            visibility: hidden;
+        }
+        .top_logo{
+            position: absolute;
+            height: 10%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .centered{
+            display: flex;
+            width: 10vh;
+            height: 10vh;
+            position: relative;
+        }
+        .left {
+            position: absolute;
+            width: 15%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .left .button {
+            padding: 5px 0;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 22px;
+            margin: 4px 2px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+            width: 80%;
+            display: inline-block;
+        }
+        span{
+            color: white;
+            font-size: 10px;
+        }
+        .bottom{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #canvas{
+        margin-top: 10vh;  
+        margin-left: 15%;
+        width: 80%;
+        height: 80%;
+        outline: none
+        }
+        iframe{
+            position: absolute;
+            right: 5vw;
+            top: 10%;
+            height: 80vh;
+            width: 60%;
+        }
+        .arrows{
+            display: flex;
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+        .arrow{
+            width: 20px;
+            height: 20px;
+            background: url(./src/arrow.png);
+            background-size : 100% 100%;
+        }
+        .topArrow{
+            position: absolute;
+            left: 20px; 
+            transform: rotate(270deg);           
+        }
+        .rightArrow{
+            position: absolute;
+            top: 20px;
+            right: 0;
+        }
+        .bottomArrow{
+            position: absolute;
+            bottom: 0px;
+            left: 20px;
+            transform: rotate(90deg);
+        }
+        .leftArrow{
+            position: absolute;
+            top: 20px;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top_logo hidden">
+            <img class="centered" src="./src/logo.png" alt="">
+    </div>
+    <div class="left hidden">
+        <button id="goIn" class="button">Enter</button>
+        <button id="goOut" class="button">Exit</button>
+        <span>Click floor circle to navigate</span>
+    </div>
+    <div class="bottom hidden">
+        <div class="arrows">
+            <div class="arrow topArrow"></div>
+            <div class="arrow rightArrow"></div>
+            <div class="arrow bottomArrow"></div>
+            <div class="arrow leftArrow"></div>
+        </div>
+    </div>
+    <iframe src="" frameborder="2" style="display:none;"></iframe>
+    <video id ="video" muted playsinline preload loop style="display:none;">
+        <source src="./src/video.mp4" type="video/mp4">
+        </video>
+    <div id="wrap">
+        <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="error"><div>Oops! Something went wrong.</div> </div>
+    </div>
+    <canvas id="canvas"></canvas>
+</body>
+<script>
+    const src = [
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+  "https://www.youtube.com/embed/jNQXAC9IVRw",
+];
+
+</script>
+<script src="dist/bundle.js"></script>
+</html>
